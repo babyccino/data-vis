@@ -3,7 +3,7 @@ import Navbar from "./components/Navbar"
 
 function App() {
   return (
-    <div className="flex min-h-screen flex-col gap-2">
+    <div className="flex h-screen overflow-scroll flex-col gap-2">
       <Navbar />
       <Outlet />
     </div>

@@ -7,7 +7,7 @@ import { Link, useNavigate, useParams } from "react-router-dom"
 import { getAnalysis } from "../../api/getAnalysis"
 import { Analysis, FeatureList, VariableRanking } from "../../api/mockedData"
 
-function ModelDisplay({ analysis, modelName }: { modelName: string; analysis: Analysis[] }) {
+function ModelDisplay({ analysis}: { analysis: Analysis[] }) {
   const featureList = analysis[0] as FeatureList
   const keys = featureList.value
   const data = (analysis.slice(1) as VariableRanking[]).map(val => ({
@@ -16,12 +16,11 @@ function ModelDisplay({ analysis, modelName }: { modelName: string; analysis: An
   }))
 
   return (
-    <div className="flex w-screen flex-col items-center overflow-scroll">
-      <Typography level="h3">{modelName}</Typography>
-      <div className="relative w-screen overflow-scroll">
+    <div className="w-screen p-2">
+      <div className="overflow-scroll rounded-md px-2 bg-gray-200 max-w-[800px] mx-auto">
         <div
-          style={{ height: "calc(100vh - 10rem)" }}
-          className="mx-auto w-full min-w-[500px] max-w-[800px]"
+          style={{ height: "calc(100vh - 12rem)" }}
+          className="min-w-[500px]"
         >
           <ResponsiveBar
             layout="horizontal"
@@ -96,15 +95,18 @@ const AnalysisView = () => {
   }, [])
 
   return (
-    <div className="relative flex h-full w-full flex-grow flex-col items-center justify-center">
-      <Link className="absolute left-5 top-2 rounded-md p-2 hover:bg-slate-100" to="/Inventory">
-        <KeyboardBackspaceIcon />
-      </Link>
+    <div className="relative h-full w-full flex flex-col items-center">
+      <div className="my-2 relative w-full flex flex-row justify-center items-center p-2">
+        <Link className="absolute left-4 rounded-md p-2 hover:bg-slate-100" to="/Inventory">
+          <KeyboardBackspaceIcon />
+        </Link>
+        <Typography level="h3">{modelName}</Typography>
+      </div>
       <div className="inline-flex flex-shrink flex-row flex-wrap justify-center gap-4">
         {loading ? (
           <CircularProgress />
         ) : (
-          analyses.map(analysis => <ModelDisplay modelName={modelName} analysis={analysis} />)
+          analyses.map(analysis => <ModelDisplay analysis={analysis} />)
         )}
       </div>
     </div>
