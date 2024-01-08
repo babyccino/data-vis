@@ -7,7 +7,7 @@ import { Link, useNavigate, useParams } from "react-router-dom"
 import { getAnalysis } from "../../api/getAnalysis"
 import { Analysis, FeatureList, VariableRanking } from "../../api/mockedData"
 
-function ModelDisplay({ analysis}: { analysis: Analysis[] }) {
+function ModelDisplay({ analysis }: { analysis: Analysis[] }) {
   const featureList = analysis[0] as FeatureList
   const keys = featureList.value
   const data = (analysis.slice(1) as VariableRanking[]).map(val => ({
@@ -17,11 +17,8 @@ function ModelDisplay({ analysis}: { analysis: Analysis[] }) {
 
   return (
     <div className="w-screen p-2">
-      <div className="overflow-scroll rounded-md px-2 bg-gray-200 max-w-[800px] mx-auto">
-        <div
-          style={{ height: "calc(100vh - 12rem)" }}
-          className="min-w-[500px]"
-        >
+      <div className="mx-auto max-w-[800px] overflow-scroll rounded-md border border-gray-300 bg-gray-200 px-2">
+        <div style={{ height: "calc(100vh - 12rem)" }} className="min-w-[500px]">
           <ResponsiveBar
             layout="horizontal"
             data={data as any}
@@ -95,8 +92,8 @@ const AnalysisView = () => {
   }, [])
 
   return (
-    <div className="relative h-full w-full flex flex-col items-center">
-      <div className="my-2 relative w-full flex flex-row justify-center items-center p-2">
+    <div className="relative flex h-full w-full flex-col items-center">
+      <div className="relative my-2 flex w-full flex-row items-center justify-center p-2">
         <Link className="absolute left-4 rounded-md p-2 hover:bg-slate-100" to="/Inventory">
           <KeyboardBackspaceIcon />
         </Link>
